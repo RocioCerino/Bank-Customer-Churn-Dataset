@@ -77,3 +77,20 @@ df.columns
 
 ver2 = df.groupby(["gender"]).agg(numero_usuario=('age', 'mean'))
 vemos = df.groupby(['country']).agg(edad_media=('age', 'mean'), edad_sd = ('age', 'std'))
+
+variables = ['credit_score','balance' ]
+agg_1 = {i:lambda val: val.mean() for i in variables}
+agg_2 = {i:lambda val: (val == 0).sum() for i in variables}
+
+ver2 = df.groupby(["gender"]).agg(agg_1, agg_2)
+
+df_ver = df[df['age'] >= 30].groupby('gender').agg(
+    # Get max of the duration column for each group
+    max_age=('age', max),
+    # Get min of the duration column for each group
+    min_age=('age', min),
+    # Get sum of the duration column for each group
+    total_balance=('balance', sum),
+    # Apply a lambda to date column
+    # num_days=("date", lambda x: (max(x) - min(x)).days)    
+)
