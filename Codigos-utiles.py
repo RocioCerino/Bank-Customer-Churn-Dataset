@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import pandas_profiling
 
 
@@ -53,10 +54,26 @@ agg_d
 ver2 = df.groupby(["gender"]).agg(agg_d)
 ver2
 
-
-
-
-
 df[df['credit_score'] == 0].shape[0]
 
+
+
 df[df['balance'] == 0].shape[0]
+
+# vamos a hace boludeces - limpiar de extremos alguna variable
+
+
+df2 = df[df["age"] >= np.median(df["age"])]
+
+df2.shape
+df.shape
+
+ls = np.mean(df2["age"]) + 2*np.std(df["age"])
+li = np.mean(df["age"]) - 2*np.std(df["age"])
+
+df_dep = df[(df.age >= li) & (df.age <= ls)]
+
+df.columns  
+
+ver2 = df.groupby(["gender"]).agg(numero_usuario=('age', 'mean'))
+vemos = df.groupby(['country']).agg(edad_media=('age', 'mean'), edad_sd = ('age', 'std'))
