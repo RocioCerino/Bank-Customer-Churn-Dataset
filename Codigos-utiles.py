@@ -5,6 +5,7 @@ import pandas_profiling
 df = pd.read_csv('Bank Customer Churn Prediction.csv')
 
 
+
 df.info()
 
 df["credit_score"].describe()
@@ -25,6 +26,11 @@ profile.to_file("output.html")
 tabla = df[["gender", "country"]].value_counts().reset_index()
 
 ver = pd.pivot_table(tabla, index= "gender", columns= "country").reset_index()
+
+df.columns
+
+tabla_ro = pd.pivot_table(df, index="country", columns="tenure" )
+
 ver
 
 
