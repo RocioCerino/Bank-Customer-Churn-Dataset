@@ -94,3 +94,4 @@ df_ver = df[df['age'] >= 30].groupby('gender').agg(
     # Apply a lambda to date column
     # num_days=("date", lambda x: (max(x) - min(x)).days)    
 )
+
